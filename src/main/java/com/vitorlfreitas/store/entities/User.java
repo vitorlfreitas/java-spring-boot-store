@@ -1,4 +1,4 @@
-package com.codewithmosh.store.entities;
+package com.vitorlfreitas.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,21 +31,28 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "user",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true)
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
     public void addAddress(Address address) {
+        if (address == null) return;
         addresses.add(address);
         address.setUser(this);
     }
 
     public void removeAddress(Address address) {
+        if (address == null) return;
         addresses.remove(address);
         address.setUser(null);
     }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToOne(
+            mappedBy = "user",
+            cascade = CascadeType.REMOVE)
     private Profile profile;
 
     @ManyToMany
@@ -56,7 +64,7 @@ public class User {
     private Set<Product> favoriteProducts = new HashSet<>();
 
     public void addFavoriteProduct(Product product) {
-        favoriteProducts.add(product);
+        if (product != null) favoriteProducts.add(product);
     }
 
     @Override

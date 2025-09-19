@@ -6,9 +6,9 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
-    <groupId>com.codewithmosh</groupId>
+    <groupId>com.vitorlfreitas</groupId>
     <artifactId>store</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>store</name>
@@ -49,6 +49,11 @@
             <groupId>org.springframework.boot</groupId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
             <artifactId>mysql-connector-j</artifactId>
             <groupId>com.mysql</groupId>
             <scope>runtime</scope>
@@ -64,9 +69,9 @@
         <dependency>
             <artifactId>lombok</artifactId>
             <groupId>org.projectlombok</groupId>
+            <version>1.18.38</version>
             <scope>annotationProcessor</scope>
         </dependency>
-
 
     </dependencies>
 
@@ -78,8 +83,8 @@
                 <version>10.15.0</version>
                 <configuration>
                     <url>jdbc:mysql://localhost:3306/store_api?createDatabaseIfNotExist=true</url>
-                    <user>root</user>
-                    <password>MyPassword!</password>
+                    <user>vitorlfreitas</user>
+                    <password>Salvejorge1@</password>
                     <cleanDisabled>false</cleanDisabled>
                 </configuration>
             </plugin>

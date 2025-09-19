@@ -1,14 +1,12 @@
-package com.codewithmosh.store.entities;
+package com.vitorlfreitas.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+@Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Getter
-@Setter
+@ToString(exclude = "user")
 @Entity
 @Table(name = "addresses")
 public class Address {
@@ -31,6 +29,5 @@ public class Address {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @ToString.Exclude
     private User user;
 }

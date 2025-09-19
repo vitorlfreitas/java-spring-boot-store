@@ -1,9 +1,9 @@
 package com.vitorlfreitas.store.controllers;
 
-import com.vitorlfreitas.store.entities.User;
+import com.vitorlfreitas.store.dtos.UserDto;
+import com.vitorlfreitas.store.mappers.UserMapper;
 import com.vitorlfreitas.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,14 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserRepository userRepository;
+    // Declares the Mapper
+    private final UserMapper userMapper;
 
     @GetMapping()
-    public Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+    public Iterable<UserDto> getAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toDto).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
 
         var user = userRepository.findById(id).orElse(null);
 
@@ -31,6 +35,6 @@ public class UserController {
             return ResponseEntity.notFound().build();
 
 
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
 }

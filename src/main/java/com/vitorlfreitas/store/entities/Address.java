@@ -21,11 +21,11 @@ public class Address {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "zip")
-    private String zip;
+    @Column(name = "eircode")
+    private String eircode;
 
-    @Column(name = "state")
-    private String state;
+    @Column(name = "county")
+    private String county;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

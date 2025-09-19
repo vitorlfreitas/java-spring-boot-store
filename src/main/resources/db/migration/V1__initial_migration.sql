@@ -3,8 +3,8 @@ CREATE TABLE addresses
     id      BIGINT AUTO_INCREMENT NOT NULL,
     street  VARCHAR(255) NOT NULL,
     city    VARCHAR(255) NOT NULL,
-    state   VARCHAR(255) NOT NULL,
-    zip     VARCHAR(255) NOT NULL,
+    county   VARCHAR(255) NOT NULL,
+    eircode     VARCHAR(255) NOT NULL,
     user_id BIGINT       NOT NULL,
     CONSTRAINT `PRIMARY` PRIMARY KEY (id)
 );

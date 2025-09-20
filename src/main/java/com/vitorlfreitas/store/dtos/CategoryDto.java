@@ -5,11 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class UserDto {
+public class CategoryDto {
 
     private Long id;
     private String name;
-    private String email;
-
 
 }

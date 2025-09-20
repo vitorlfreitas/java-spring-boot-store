@@ -1,6 +1,7 @@
 package com.vitorlfreitas.store.controllers;
 
 import com.vitorlfreitas.store.dtos.RegisterUserRequest;
+import com.vitorlfreitas.store.dtos.UpdateUserRequest;
 import com.vitorlfreitas.store.dtos.UserDto;
 import com.vitorlfreitas.store.mappers.UserMapper;
 import com.vitorlfreitas.store.repositories.UserRepository;
@@ -79,5 +80,28 @@ public class UserController {
         // and the body containing the created User DTO
         return ResponseEntity.created(uri).body(userDto);
     }
+
+    @PutMapping("/{id}")
+    // Maps HTTP PUT requests to /users/{id}, used to update an existing user
+    public ResponseEntity<UserDto> updateUser(
+            @PathVariable(name = "id") Long id,           // Extracts the user ID from the URL
+            @RequestBody UpdateUserRequest request) {     // Maps the JSON body into an UpdateUserRequest object
+
+        // Look up the user in the database by ID
+        var user = userRepository.findById(id).orElse(null);
+
+        // If no user is found, return HTTP 404 Not Found
+        if (user == null) return ResponseEntity.notFound().build();
+
+        // Apply the updates from the request DTO onto the existing user entity
+        userMapper.update(request, user);
+
+        // Save the updated entity back into the database
+        userRepository.save(user);
+
+        // Convert the updated entity to a DTO and return it with HTTP 200 OK
+        return ResponseEntity.ok(userMapper.toDto(user));
+    }
+
 
 }

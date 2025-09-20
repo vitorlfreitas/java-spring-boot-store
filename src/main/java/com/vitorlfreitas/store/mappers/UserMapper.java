@@ -1,5 +1,6 @@
 package com.vitorlfreitas.store.mappers;
 
+import com.vitorlfreitas.store.dtos.RegisterUserRequest;
 import com.vitorlfreitas.store.dtos.UserDto;
 import com.vitorlfreitas.store.entities.User;
 import org.mapstruct.Mapper;
@@ -8,4 +9,5 @@ import org.mapstruct.Mapper;
 public interface UserMapper {
 
     UserDto toDto(User user);
+    User toEntity(RegisterUserRequest request);
 }
